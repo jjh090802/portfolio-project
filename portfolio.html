@@ -13,103 +13,76 @@
     --bg: #0a0a0a;
     --bg2: #111111;
     --bg3: #181818;
-    --line: rgba(255,255,255,0.07);
-    --line2: rgba(255,255,255,0.15);
+    --line: rgba(255,255,255,0.05); /* 격자 은은하게 */
+    --line2: rgba(255,255,255,0.12);
     --text: #f0ece4;
     --muted: #6b6b6b;
-    --accent: #c8f542; /* 형광 라임색 포인트 */
+    --accent: #c8f542;
     --mono: 'DM Mono', monospace;
     --display: 'Bebas Neue', sans-serif;
     --body: 'Noto Sans KR', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; cursor: none; overflow-x: hidden; position: relative; z-index: 0; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--body);
-    font-weight: 300;
-    cursor: none;
-    overflow-x: hidden;
+  /* ── ⬛ 배경 격자 (글씨 없는 빈 공간만 채움) ── */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1;
+    background-image: 
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 50px 50px;
   }
 
   /* ── CURSOR ── */
-  .cursor {
-    position: fixed; width: 8px; height: 8px; background: var(--accent);
-    border-radius: 50%; pointer-events: none; z-index: 10001; /* Z-index 제일 위로 */
-    transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: difference;
-  }
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10001; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s; mix-blend-mode: difference; }
   .cursor.no-blend { mix-blend-mode: normal; }
-  .cursor-ring {
-    position: fixed; width: 36px; height: 36px; border: 1px solid rgba(200,245,66,0.4);
-    border-radius: 50%; pointer-events: none; z-index: 10000;
-    transform: translate(-50%, -50%); transition: all 0.12s ease;
-  }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(200,245,66,0.4); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: all 0.12s ease; }
 
-  /* Noise overlay */
-  body::before {
-    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9997; opacity: 0.4;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
 
-  ::-webkit-scrollbar { width: 2px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--accent); }
-
-  /* ── LAYOUT ── */
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
-
-  /* ── HERO ── */
-  .hero { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; padding: 40px 0 0; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
-  .hero-top { display: flex; justify-content: space-between; padding: 0 48px; }
+  /* ── HERO (배경 보호 처리) ── */
+  .hero { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; padding: 40px 0 0; position: relative; z-index: 1; }
+  .hero-top { display: flex; justify-content: space-between; align-items: center; padding: 0 48px; background: var(--bg); }
   .hero-logo { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
-  .hero-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .hero-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted); background: var(--bg); padding-left: 10px; }
   .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
   .hero-main { display: flex; flex-direction: column; justify-content: center; padding: 0 48px; padding-top: 60px; }
-  .hero-eyebrow { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
-  .hero-name { font-family: var(--display); font-size: clamp(72px, 12vw, 160px); line-height: 0.92; letter-spacing: -0.01em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
-  .hero-name span { display: block; color: var(--accent); font-size: clamp(54px, 9vw, 120px); }
-  .hero-desc { margin-top: 40px; max-width: 520px; font-size: 15px; line-height: 1.8; color: rgba(240,236,228,0.6); opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
-
-  .hero-bottom { padding: 32px 48px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--line); }
   
-  /* 기능 1: Scroll Button 스타일 수정 */
-  .hero-scroll { 
-    font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.15em; 
-    text-transform: uppercase; display: flex; align-items: center; gap: 16px; cursor: pointer; 
-    transition: color 0.3s;
-  }
+  /* 글씨 뒤에 배경색을 주어 격자를 가림 */
+  .hero-eyebrow { display: inline-block; width: fit-content; background: var(--bg); padding-right: 20px; font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .hero-name { display: inline-block; width: fit-content; background: var(--bg); font-family: var(--display); font-size: clamp(72px, 12vw, 160px); line-height: 0.92; letter-spacing: -0.01em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s 0.35s forwards; padding-right: 20px; }
+  .hero-name span { display: block; color: var(--accent); font-size: clamp(54px, 9vw, 120px); }
+  .hero-desc { margin-top: 40px; padding: 10px 20px 10px 0; background: var(--bg); width: fit-content; max-width: 520px; font-size: 15px; line-height: 1.8; color: rgba(240,236,228,0.7); opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+
+  .hero-bottom { padding: 32px 48px; display: flex; justify-content: space-between; align-items: flex-end; background: var(--bg); border-top: 1px solid var(--line); }
+  .hero-scroll { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: color 0.3s; }
   .hero-scroll:hover { color: var(--accent); }
   .scroll-line { width: 40px; height: 1px; background: var(--muted); position: relative; overflow: hidden; }
   .scroll-line::after { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: var(--accent); animation: scanline 2s infinite; }
   @keyframes scanline { to { left: 100%; } }
-  
   .hero-year { font-family: var(--mono); font-size: 11px; color: var(--muted); }
-  .hero-bg-text { position: absolute; bottom: 80px; right: -20px; font-family: var(--display); font-size: clamp(100px, 20vw, 260px); color: rgba(255,255,255,0.02); pointer-events: none; user-select: none; }
 
   /* ── SECTION SHARED ── */
-  section { padding: 100px 0; }
-  .section-label { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 48px; display: flex; align-items: center; gap: 16px; }
+  section { padding: 100px 0; border-bottom: 1px solid var(--line); }
+  .section-label { background: var(--bg); display: inline-flex; align-items: center; gap: 16px; padding-right: 20px; font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 48px; width: 100%; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line2); }
 
   /* ── SKILLS ── */
-  .skills-section { border-bottom: 1px solid var(--line); }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .skill-item { background: var(--bg); padding: 28px 24px; transition: background 0.3s; position: relative; overflow: hidden; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1px; background: var(--line2); border: 1px solid var(--line2); }
+  .skill-item { background: var(--bg); padding: 28px 24px; transition: background 0.3s; position: relative; }
   .skill-item::before { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--accent); transition: width 0.4s ease; }
   .skill-item:hover { background: var(--bg2); }
   .skill-item:hover::before { width: 100%; }
   .skill-item:hover .skill-name { color: var(--accent); transition: color 0.3s; }
-  .skill-name { font-family: var(--mono); font-size: 14px; font-weight: 400; letter-spacing: 0.05em; margin-bottom: 8px; }
-  .skill-type { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+  .skill-name { font-family: var(--mono); font-size: 14px; font-weight: 400; margin-bottom: 8px; }
+  .skill-type { font-size: 11px; color: var(--muted); }
 
   /* ── AWARDS ── */
-  .awards-section { border-bottom: 1px solid var(--line); }
-  .award-item { display: grid; grid-template-columns: 60px 1fr auto; gap: 24px; align-items: start; padding: 32px 0; border-bottom: 1px solid var(--line); position: relative; }
+  .award-item { background: var(--bg); display: grid; grid-template-columns: 60px 1fr auto; gap: 24px; align-items: start; padding: 32px 20px; border-bottom: 1px solid var(--line2); position: relative; }
   .award-item:last-child { border-bottom: none; }
   .award-item::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
   .award-item:hover::after { transform: scaleX(1); }
@@ -120,11 +93,10 @@
   .award-badge { font-family: var(--mono); font-size: 10px; color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; text-transform: uppercase; align-self: center; }
 
   /* ── PROJECTS ── */
-  .projects-section { border-bottom: 1px solid var(--line); }
-  .project-list { display: flex; flex-direction: column; }
-  .project-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 40px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--text); position: relative; transition: all 0.3s; cursor: pointer; }
-  .project-item:last-child { border-bottom: none; }
+  .project-list { display: flex; flex-direction: column; gap: 1px; background: var(--line2); border: 1px solid var(--line2); }
+  .project-item { background: var(--bg); display: flex; justify-content: space-between; align-items: flex-start; padding: 40px 24px; text-decoration: none; color: var(--text); position: relative; transition: all 0.3s; cursor: pointer; }
   .project-item::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; }
+  .project-item:hover { background: var(--bg2); }
   .project-item:hover::after { transform: scaleX(1); transform-origin: left; }
   .project-item:hover .project-name { color: var(--accent); padding-left: 10px; }
   .project-name { font-size: 24px; font-weight: 400; margin-bottom: 12px; transition: all 0.3s; }
@@ -132,51 +104,37 @@
   .project-year { font-family: var(--mono); font-size: 14px; color: var(--muted); }
 
   /* ── GITHUB STATS ── */
-  .github-section { border-bottom: 1px solid var(--line); }
   .github-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-  .stat-card { background: var(--bg2); border: 1px solid var(--line); padding: 32px; display: flex; flex-direction: column; align-items: center; transition: background 0.3s; }
-  .stat-card:hover { background: var(--bg3); }
-  .stat-card img { width: 100%; max-width: 400px; height: auto; }
-  .grass-card { background: var(--bg2); border: 1px solid var(--line); padding: 32px; display: flex; flex-direction: column; transition: background 0.3s; }
-  .grass-card:hover { background: var(--bg3); }
+  .stat-card { background: var(--bg); border: 1px solid var(--line2); padding: 32px; display: flex; flex-direction: column; align-items: center; transition: background 0.3s; }
+  .stat-card:hover { background: var(--bg2); }
+  .stat-card img { width: 100%; max-width: 400px; height: auto; filter: brightness(0.9); }
+  .grass-card { background: var(--bg); border: 1px solid var(--line2); padding: 32px; display: flex; flex-direction: column; transition: background 0.3s; }
+  .grass-card:hover { background: var(--bg2); }
   .stat-title { font-family: var(--mono); font-size: 14px; color: var(--accent); margin-bottom: 24px; letter-spacing: 0.1em; text-transform: uppercase; width: 100%; text-align: left; }
-  .grass-wrapper { width: 100%; overflow-x: auto; padding-bottom: 10px; }
-  .grass-wrapper img { width: 100%; min-width: 700px; height: auto; opacity: 0.9; filter: drop-shadow(0 0 10px rgba(200,245,66,0.1)); }
+  /* 🔥 잔디밭 다크테마 반영 */
+  .grass-wrapper { width: 100%; overflow-x: auto; padding-bottom: 10px; filter: invert(0.92) hue-rotate(170deg) contrast(1.1); opacity: 0.8; }
+  .grass-wrapper img { width: 100%; min-width: 700px; height: auto; }
 
   /* ── CONTACT ── */
-  .contact-section { background: var(--bg2); border-top: 1px solid var(--line); }
-  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  .contact-title { font-family: var(--display); font-size: clamp(48px, 7vw, 96px); line-height: 0.95; text-transform: uppercase; }
+  .contact-title { background: var(--bg); display: inline-block; padding: 20px 20px 20px 0; font-family: var(--display); font-size: clamp(48px, 7vw, 96px); line-height: 0.95; text-transform: uppercase; }
   .contact-title em { font-style: normal; color: var(--accent); }
-  .contact-links { display: flex; flex-direction: column; gap: 4px; }
-  .contact-link { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--text); font-size: 14px; font-family: var(--mono); position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer; }
+  .contact-link { background: var(--bg); display: flex; justify-content: space-between; align-items: center; padding: 30px 24px; border: 1px solid var(--line2); text-decoration: none; color: var(--text); font-size: 14px; font-family: var(--mono); position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer; margin-top: 24px; }
   .contact-link::before { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: var(--accent); transition: left 0.35s ease; z-index: 0; }
   .contact-link:hover::before { left: 0; }
-  .contact-link:hover { color: #0a0a0a; padding-left: 12px; }
+  .contact-link:hover { color: #0a0a0a; padding-left: 36px; }
   .contact-link > * { position: relative; z-index: 1; }
-  .contact-link-label { color: var(--muted); font-size: 10px; text-transform: uppercase; }
+  .contact-link-label { color: var(--muted); font-size: 10px; text-transform: uppercase; margin-bottom: 4px; }
   .link-arrow { font-size: 16px; transition: transform 0.3s; }
   .contact-link:hover .link-arrow { transform: rotate(45deg); }
 
-  /* ── FOOTER ── */
-  footer { padding: 24px 48px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 10px; color: var(--muted); }
+  footer { background: var(--bg); padding: 24px 48px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 10px; color: var(--muted); }
 
-  /* 🔥 기능 2: 모달(팝업) UI 추가 */
-  .modal {
-    position: fixed; inset: 0; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(5px);
-    z-index: 10000; display: flex; justify-content: center; align-items: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-  }
+  /* 🔥 모달(팝업) UI */
+  .modal { position: fixed; inset: 0; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(5px); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
   .modal.active { opacity: 1; pointer-events: auto; }
-  .modal-content {
-    background: var(--bg2); border: 1px solid var(--accent); width: 90%; max-width: 600px;
-    padding: 48px; position: relative; transform: translateY(30px); transition: transform 0.4s ease;
-  }
+  .modal-content { background: var(--bg2); border: 1px solid var(--accent); width: 90%; max-width: 600px; padding: 48px; position: relative; transform: translateY(30px); transition: transform 0.4s ease; }
   .modal.active .modal-content { transform: translateY(0); }
-  .modal-close {
-    position: absolute; top: 24px; right: 24px; background: none; border: none;
-    color: var(--muted); font-size: 32px; cursor: pointer; transition: color 0.3s;
-  }
+  .modal-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--muted); font-size: 32px; cursor: pointer; transition: color 0.3s; }
   .modal-close:hover { color: var(--accent); }
   .modal-header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 24px; }
   .modal-title { font-size: 32px; font-weight: 400; margin-bottom: 8px; color: var(--accent); }
@@ -185,35 +143,28 @@
   .modal-link { display: inline-block; margin-top: 32px; font-family: var(--mono); color: var(--text); font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 4px; transition: color 0.3s; }
   .modal-link:hover { color: var(--accent); }
 
-  /* 🔥 기능 3: 토스트 알림창 UI 추가 */
-  .toast {
-    position: fixed; bottom: -100px; right: 48px; background: var(--accent); color: #0a0a0a;
-    padding: 16px 24px; font-family: var(--mono); font-size: 14px; font-weight: 600;
-    z-index: 10000; transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
+  /* 🔥 토스트 알림창 UI */
+  .toast { position: fixed; bottom: -100px; right: 48px; background: var(--accent); color: #0a0a0a; padding: 16px 24px; font-family: var(--mono); font-size: 14px; font-weight: 600; z-index: 10000; transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .toast.show { bottom: 48px; }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .container { padding: 0 24px; }
     .hero-top, .hero-main, .hero-bottom { padding: 0 24px; }
-    .hero-main { padding-top: 40px; }
-    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-    .github-grid { grid-template-columns: 1fr; }
-    .stat-card, .grass-card { padding: 24px 16px; }
-    .award-item { grid-template-columns: 40px 1fr auto; gap: 16px; }
-    .award-num { font-size: 32px; }
-    .project-item { flex-direction: column; gap: 12px; }
-    .project-year { order: -1; }
-    .modal-content { padding: 32px 24px; }
-    .toast { right: 24px; }
-    .toast.show { bottom: 24px; }
+    section { padding: 60px 0; } 
+    .hero-name { font-size: clamp(56px, 15vw, 80px); }
+    .hero-name span { font-size: clamp(44px, 12vw, 64px); }
+    .skills-grid, .github-grid { grid-template-columns: 1fr; }
+    .award-item { grid-template-columns: 1fr; gap: 12px; padding: 24px 20px; }
+    .award-num { font-size: 28px; margin-bottom: 4px; }
+    .project-item { flex-direction: column; gap: 12px; padding: 32px 24px; }
+    .project-year { order: -1; margin-bottom: -4px; color: var(--accent); } 
+    .contact-title { font-size: clamp(40px, 10vw, 60px); }
+    .modal-content { padding: 32px 24px; width: 95%; }
+    .toast { right: 50%; transform: translateX(50%); width: max-content; }
+    .toast.show { bottom: 32px; }
   }
 
-  @media (hover: none) and (pointer: coarse) {
-    body { cursor: auto; }
-    .cursor, .cursor-ring { display: none !important; }
-  }
+  @media (hover: none) and (pointer: coarse) { body { cursor: auto; } .cursor, .cursor-ring { display: none !important; } }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -228,7 +179,7 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<div id="toast" class="toast">[Success] 이메일 주소가 복사되었습니다.</div>
+<div id="toast" class="toast">Email copied to clipboard.</div>
 
 <div id="project-modal" class="modal">
   <div class="modal-content">
@@ -237,9 +188,9 @@
       <h2 class="modal-title" id="modal-title">Project Name</h2>
       <span class="modal-year" id="modal-year">202X</span>
     </div>
-    <p class="modal-desc" id="modal-desc">Project description will appear here.</p>
+    <p class="modal-desc" id="modal-desc"></p>
     <div class="tag-row" id="modal-tags" style="animation: none; opacity: 1;"></div>
-    <a href="#" class="modal-link" target="_blank">View GitHub ↗</a>
+    <a href="https://github.com/jjh090802" class="modal-link" target="_blank">View GitHub ↗</a>
   </div>
 </div>
 
@@ -251,11 +202,11 @@
 
   <div class="hero-main">
     <div class="hero-eyebrow">Fullstack Developer & Designer</div>
-    <h1 class="hero-name">Jeon<br><span>Jae Hyun</span></h1>
+    <h1 class="hero-name">
+      Jeon<br>
+      <span>Jae Hyun</span>
+    </h1>
     <p class="hero-desc">보이는 곳과 보이지 않는 곳 모두에 진심인<br>감각적인 풀스택 개발자 전재현입니다.</p>
-    <div class="tag-row">
-      <span class="tag">Design</span><span class="tag">Development</span><span class="tag">Solution</span>
-    </div>
   </div>
 
   <div class="hero-bottom">
@@ -265,11 +216,9 @@
     </div>
     <div class="hero-year">© 2026</div>
   </div>
-
-  <div class="hero-bg-text">JJH</div>
 </section>
 
-<section class="skills-section" id="skills">
+<section id="skills">
   <div class="container">
     <div class="section-label reveal">Skills & Tools</div>
     <div class="skills-grid reveal">
@@ -282,49 +231,54 @@
   </div>
 </section>
 
-<section class="awards-section">
+<section>
   <div class="container">
     <div class="section-label reveal">Awards</div>
-    <div class="award-item reveal">
-      <div class="award-num">01</div>
-      <div><div class="award-name">웹 디자인 및 개발<br>지방기능경기대회</div><div class="award-detail">웹 디자인 및 개발 부문</div></div>
-      <div class="award-badge">동메달</div>
-    </div>
-    <div class="award-item reveal">
-      <div class="award-num">02</div>
-      <div><div class="award-name">달빛연합 해커톤</div><div class="award-detail">팀 프로젝트 부문</div></div>
-      <div class="award-badge">융합상</div>
+    <div style="background: var(--line2); border: 1px solid var(--line2); gap: 1px; display: flex; flex-direction: column;">
+      <div class="award-item reveal">
+        <div class="award-num">01</div>
+        <div>
+          <div class="award-name">웹 디자인 및 개발 지방기능경기대회</div>
+          <div class="award-detail">웹 디자인 및 개발 부문</div>
+        </div>
+        <div class="award-badge">동메달</div>
+      </div>
+      <div class="award-item reveal">
+        <div class="award-num">02</div>
+        <div>
+          <div class="award-name">달빛연합 해커톤</div>
+          <div class="award-detail">팀 프로젝트 부문</div>
+        </div>
+        <div class="award-badge">융합상</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="projects-section">
+<section>
   <div class="container">
     <div class="section-label reveal">Selected Works</div>
-    <div class="project-list">
-      <a href="#" class="project-item reveal" 
+    <div class="project-list reveal">
+      <a href="#" class="project-item" 
          data-title="해커톤 융합상 프로젝트" 
          data-desc="기획부터 디자인, 개발까지 융합적인 사고로 완성한 프로젝트입니다. 실시간 데이터 시각화와 반응형 UI를 집중적으로 구현했습니다." 
-         data-year="2025" 
-         data-tags="JavaScript, Figma, API">
+         data-year="2025" data-tags="JavaScript, Figma, API">
         <div class="project-info">
           <h3 class="project-name">해커톤 융합상 프로젝트</h3>
-          <p class="project-desc">클릭하여 프로젝트 상세 내용과 사용 기술 보기</p>
+          <p class="project-desc">클릭하여 상세 정보 보기</p>
           <div class="tag-row" style="margin-top: 12px; animation: none; opacity: 1;">
             <span class="tag">JavaScript</span><span class="tag">Figma</span>
           </div>
         </div>
         <div class="project-year">2025</div>
       </a>
-
-      <a href="#" class="project-item reveal" 
+      <a href="#" class="project-item" 
          data-title="미니멀리즘 포트폴리오" 
          data-desc="브루탈리즘 스타일의 인터랙티브 개인 포트폴리오입니다. 커스텀 커서, 다크 모드 렌더링, 깃허브 API 연동 등을 순수 바닐라 JS로 구현했습니다." 
-         data-year="2026" 
-         data-tags="HTML/CSS, Vanilla JS, UI/UX">
+         data-year="2026" data-tags="HTML/CSS, Vanilla JS, UI/UX">
         <div class="project-info">
           <h3 class="project-name">미니멀리즘 포트폴리오</h3>
-          <p class="project-desc">클릭하여 프로젝트 상세 내용과 사용 기술 보기</p>
+          <p class="project-desc">클릭하여 상세 정보 보기</p>
           <div class="tag-row" style="margin-top: 12px; animation: none; opacity: 1;">
             <span class="tag">HTML/CSS</span><span class="tag">Vanilla JS</span>
           </div>
@@ -335,17 +289,17 @@
   </div>
 </section>
 
-<section class="github-section">
+<section>
   <div class="container">
     <div class="section-label reveal">Coding Activity</div>
     <div class="github-grid reveal">
       <div class="stat-card">
         <h3 class="stat-title">GitHub Stats</h3>
-        <img src="https://github-readme-stats.shion.dev/api?username=jjh090802&theme=radical&show_icons=true&bg_color=111111&text_color=f0ece4&title_color=c8f542&hide_border=true" alt="GitHub Stats">
+        <img src="https://github-readme-stats.shion.dev/api?username=jjh090802&theme=radical&show_icons=true&bg_color=0a0a0a&text_color=f0ece4&title_color=c8f542&hide_border=true" alt="GitHub Stats">
       </div>
       <div class="stat-card">
         <h3 class="stat-title">Top Languages</h3>
-        <img src="https://github-readme-stats.shion.dev/api/top-langs?username=jjh090802&layout=compact&theme=radical&bg_color=111111&text_color=f0ece4&title_color=c8f542&hide_border=true" alt="Top Languages">
+        <img src="https://github-readme-stats.shion.dev/api/top-langs?username=jjh090802&layout=compact&theme=radical&bg_color=0a0a0a&text_color=f0ece4&title_color=c8f542&hide_border=true" alt="Top Languages">
       </div>
     </div>
     <div class="grass-card reveal">
@@ -357,18 +311,14 @@
   </div>
 </section>
 
-<section class="contact-section">
+<section style="border-bottom: none;">
   <div class="container">
     <div class="section-label reveal">Contact</div>
-    <div class="contact-inner">
+    <div>
       <div class="reveal"><h2 class="contact-title">Let's<br><em>work</em><br>together.</h2></div>
-      <div class="contact-links reveal">
+      <div class="reveal">
         <a class="contact-link" href="#" id="copy-email" data-email="j01092014477@gmail.com">
           <span><div class="contact-link-label">Email</div>j01092014477@gmail.com</span>
-          <span class="link-arrow">↗</span>
-        </a>
-        <a class="contact-link" href="https://github.com/jjh090802" target="_blank">
-          <span><div class="contact-link-label">GitHub</div>github.com/jjh090802</span>
           <span class="link-arrow">↗</span>
         </a>
       </div>
@@ -377,43 +327,38 @@
 </section>
 
 <footer>
-  <span>Jeon Jae Hyun — 전재현</span>
+  <span>Jeon Jae Hyun</span>
   <span>Designed & Built by JJH</span>
   <span>2026</span>
 </footer>
 
 <script>
-  // Cursor Logic
+  // ── Cursor Logic ──
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
   });
 
   function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
     requestAnimationFrame(animateRing);
   }
   animateRing();
 
-  // Hover animations for cursor (추가된 요소들 반영)
+  // Hover effects
   document.querySelectorAll('a, .skill-item, .award-item, .project-item, .stat-card, .grass-card, .hero-scroll, button').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.width = '14px'; cursor.style.height = '14px';
-      ring.style.width = '52px'; ring.style.height = '52px';
-      ring.style.borderColor = 'var(--accent)';
+      ring.style.width = '52px'; ring.style.height = '52px'; ring.style.borderColor = 'var(--accent)';
     });
     el.addEventListener('mouseleave', () => {
       cursor.style.width = '8px'; cursor.style.height = '8px';
-      ring.style.width = '36px'; ring.style.height = '36px';
-      ring.style.borderColor = 'rgba(200,245,66,0.4)';
+      ring.style.width = '36px'; ring.style.height = '36px'; ring.style.borderColor = 'rgba(200,245,66,0.4)';
     });
   });
 
@@ -423,7 +368,7 @@
     el.addEventListener('mouseleave', () => cursor.classList.remove('no-blend'));
   });
 
-  // Scroll Reveal Logic
+  // ── Scroll Reveal Logic ──
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -435,14 +380,13 @@
   }, { threshold: 0.1 });
   revealEls.forEach(el => io.observe(el));
 
-  // 🔥 기능 1: Smooth Scroll 적용
+  // ── Smooth Scroll ──
   document.getElementById('scroll-btn').addEventListener('click', () => {
     document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
   });
 
-  // 🔥 기능 2: Project 모달(팝업) 로직
+  // ── Project Modal Logic ──
   const modal = document.getElementById('project-modal');
-  const modalClose = document.getElementById('modal-close');
   const mTitle = document.getElementById('modal-title');
   const mDesc = document.getElementById('modal-desc');
   const mYear = document.getElementById('modal-year');
@@ -450,41 +394,34 @@
 
   document.querySelectorAll('.project-item').forEach(item => {
     item.addEventListener('click', (e) => {
-      e.preventDefault(); // 링크 이동 막기
+      e.preventDefault();
       mTitle.innerText = item.getAttribute('data-title');
       mDesc.innerText = item.getAttribute('data-desc');
       mYear.innerText = item.getAttribute('data-year');
       
-      // 태그 생성
       mTags.innerHTML = '';
-      const tags = item.getAttribute('data-tags').split(',');
-      tags.forEach(t => {
+      item.getAttribute('data-tags').split(',').forEach(t => {
         const span = document.createElement('span');
         span.className = 'tag'; span.innerText = t.trim();
         mTags.appendChild(span);
       });
-      
-      modal.classList.add('active'); // 모달 띄우기
+      modal.classList.add('active');
     });
   });
 
-  // 모달 닫기
-  modalClose.addEventListener('click', () => modal.classList.remove('active'));
+  document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('active'));
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.remove('active'); // 배경 클릭 시 닫기
+    if (e.target === modal) modal.classList.remove('active');
   });
 
-  // 🔥 기능 3: Email 복사 및 Toast 알림 로직
+  // ── Email Copy & Toast Logic ──
   const copyBtn = document.getElementById('copy-email');
   const toast = document.getElementById('toast');
   copyBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // 메일 앱 안 열리게 막기
-    const email = copyBtn.getAttribute('data-email');
-    
-    // 클립보드에 이메일 복사
-    navigator.clipboard.writeText(email).then(() => {
-      toast.classList.add('show'); // 토스트 띄우기
-      setTimeout(() => toast.classList.remove('show'), 3000); // 3초 뒤 숨기기
+    e.preventDefault();
+    navigator.clipboard.writeText(copyBtn.getAttribute('data-email')).then(() => {
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
     });
   });
 </script>
