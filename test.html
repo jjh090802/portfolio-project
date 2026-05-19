@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeon Jae Hyun | Minimal Luxury Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
+
+<style>
+  :root {
+    /* 럭셔리 실버 & 화이트 팰레트 */
+    --bg-main: #F8FAFC;       
+    --bg-card: rgba(255, 255, 255, 0.75); 
+    --text-dark: #0F172A;     
+    --text-muted: #64748B;    
+    
+    /* 은은한 메탈릭 실버 */
+    --silver-metallic: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #CBD5E1 100%);
+    --silver-border: rgba(203, 213, 225, 0.45);
+    --silver-border-hover: rgba(148, 163, 184, 0.9);
+    
+    /* 미세 명암 패턴 */
+    --shadow-premium: 0 8px 32px 0 rgba(148, 163, 184, 0.04);
+    --shadow-hover: 0 16px 40px 0 rgba(15, 23, 42, 0.06); 
+    
+    --radius-card: 24px;
+    --radius-btn: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background-color: var(--bg-main);
+    background-image: 
+      radial-gradient(circle at 0% 0%, rgba(226, 232, 240, 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(203, 213, 225, 0.4) 0%, transparent 40%);
+    background-attachment: fixed;
+    
+    color: var(--text-dark);
+    font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+    line-height: 1.6;
+    padding: 60px 20px;
+  }
+
+  .dashboard-wrapper { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+  header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; margin-bottom: 10px; }
+  .logo { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 20px; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
+  .logo-dot { width: 12px; height: 12px; background: var(--silver-metallic); border: 1px solid rgba(148,163,184,0.3); border-radius: 50%; }
+
+  .bento-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(160px, auto); gap: 20px;
+  }
+
+  /* 2D 글래스모피즘 위젯 */
+  .widget {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--silver-border);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    box-shadow: var(--shadow-premium);
+    display: flex; flex-direction: column; overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .widget:hover {
+    transform: translateY(-4px); 
+    box-shadow: var(--shadow-hover);
+    border-color: var(--silver-border-hover);
+    z-index: 10;
+  }
+
+  .widget-title { font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px; }
+
+  /* 1. 프로필 (2x2) */
+  .w-profile { grid-column: span 2; grid-row: span 2; background: var(--silver-metallic); border: 1px solid rgba(203, 213, 225, 0.7); justify-content: center; }
+  .w-profile .eyebrow { font-size: 12px; color: var(--text-muted); font-weight: 500; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .w-profile h1 { font-size: 42px; font-weight: 700; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
+  .w-profile p { color: var(--text-muted); font-weight: 400; font-size: 15px; word-break: keep-all; }
+
+  /* 2. 상태 (1x1) */
+  .w-status { grid-column: span 1; grid-row: span 1; align-items: center; justify-content: center; text-align: center; }
+  .status-icon { width: 44px; height: 44px; background: #FFFFFF; border: 1px solid var(--silver-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; position: relative; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.01); }
+  .pulse-dot { position: absolute; top: 2px; right: 2px; width: 10px; height: 10px; background: #3182CE; border-radius: 50%; animation: pulse 2s infinite; }
+  .w-status h3 { font-size: 15px; margin-bottom: 4px; }
+  .w-status p { font-size: 11px; color: var(--text-muted); }
+
+  /* 3. 인포 (1x1) */
+  .w-info { grid-column: span 1; grid-row: span 1; justify-content: center; }
+  .info-row { display: flex; flex-direction: column; margin-bottom: 12px; }
+  .info-row:last-child { margin-bottom: 0; }
+  .info-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-family: 'Poppins'; font-weight: 500; letter-spacing: 0.5px; }
+  .info-value { font-size: 13px; font-weight: 500; word-break: break-all; text-decoration: none; color: var(--text-dark); transition: color 0.2s; }
+  .clickable-email { cursor: pointer; }
+  .clickable-email:hover { color: #3182CE; }
+
+  /* 4. 깃허브 메인 스탯 (2x1) */
+  .w-stats { grid-column: span 2; grid-row: span 1; padding: 16px; }
+  .w-stats .widget-title { margin-bottom: 12px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+  .stat-card { background: rgba(255,255,255,0.5); border: 1px solid var(--silver-border); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 1px; }
+  .stat-num { font-size: 17px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--text-dark); }
+  .stat-label { font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+
+  /* 5. 타임라인 (2x2) */
+  .w-timeline { grid-column: span 2; grid-row: span 2; }
+  .tl-item { display: flex; gap: 16px; margin-bottom: 24px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-icon { width: 40px; height: 40px; background: #FFFFFF; border: 1px solid var(--silver-border); color: var(--text-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.01); }
+  .tl-content h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .tl-content p { font-size: 12px; color: var(--text-muted); word-break: keep-all; }
+
+  /* 6. 프로젝트 (2x2) */
+  .w-projects { grid-column: span 2; grid-row: span 2; }
+  .project-card { background: rgba(255,255,255,0.4); border-radius: var(--radius-btn); padding: 20px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 12px; border: 1px solid rgba(226, 232, 240, 0.6); transition: border-color 0.3s; }
+  .project-card:hover { border-color: var(--silver-border-hover); }
+  .project-card:last-child { margin-bottom: 0; }
+  .p-header { display: flex; justify-content: space-between; align-items: flex-start; }
+  .p-header h4 { font-size: 15px; font-weight: 600; }
+  .p-desc { font-size: 13px; color: var(--text-muted); word-break: keep-all; }
+  .p-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag { background: #FFFFFF; border: 1px solid var(--silver-border); color: var(--text-muted); font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+  .btn-icon { background: #FFFFFF; border: 1px solid var(--silver-border); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-dark); transition: background 0.3s; font-weight: bold; }
+  .btn-icon:hover { background: var(--bg-main); }
+
+  /* ✨ 7. 깃허브 잔디 (3x1) - 요일 겹침 제거 및 완벽 방어 CSS ✨ */
+  .w-grass { grid-column: span 3; grid-row: span 1; overflow: hidden; display: flex; flex-direction: column; }
+  .calendar-wrapper { width: 100%; overflow-x: auto; overflow-y: hidden; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
+  
+  /* 🚨 1. 지저분한 왼쪽 요일 라벨 통째로 삭제 */
+  #github-calendar table.ContributionCalendar-grid tr td:first-child,
+  #github-calendar text[text-anchor="start"] {
+    display: none !important; 
+  }
+
+  /* 🚨 2. 불필요한 텍스트 및 숨겨진 링크 강제 제거 */
+  #github-calendar a,
+  #github-calendar h2,
+  #github-calendar .sr-only,
+  #github-calendar .contrib-footer, 
+  #github-calendar .contrib-column, 
+  #github-calendar .float-left, 
+  #github-calendar .float-right, 
+  #github-calendar .text-small { 
+    display: none !important; 
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  .calendar-wrapper .ContributionCalendar-day { border-radius: 3px !important; }
+  .calendar-wrapper { filter: contrast(1.1) grayscale(0.3); }
+  .calendar-wrapper text { font-family: 'Poppins', 'Noto Sans KR', sans-serif !important; font-size: 10px !important; fill: var(--text-muted) !important; }
+
+  /* 8. 스킬 위젯 (1x1) */
+  .w-skills { grid-column: span 1; grid-row: span 1; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .w-skills .widget-title { width: 100%; margin-bottom: 16px; justify-content: flex-start; }
+  .w-skills img { width: 100%; max-width: 200px; object-fit: contain; opacity: 0.9; }
+
+  /* 모바일 스탯 슬라이더 점 */
+  .stats-dots { display: none; }
+
+  /* 토스트 알림창 */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #FFFFFF;
+    padding: 14px 24px; border-radius: 14px; font-size: 13px; font-weight: 500;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15); opacity: 0; transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1); z-index: 10000; pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(49, 130, 206, 0.4); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(49, 130, 206, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(49, 130, 206, 0); } }
+
+  /* 반응형 처리 */
+  @media (max-width: 992px) {
+    .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .w-stats, .w-grass { grid-column: span 2; }
+    .w-status, .w-info, .w-skills { grid-column: span 1; }
+    .toast { left: 50%; right: auto; transform: translate(-50%, 20px); width: max-content; } 
+    .toast.show { transform: translate(-50%, 0); }
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 40px 16px; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-grid > * { min-width: 0; }
+    .widget { grid-column: span 1 !important; grid-row: span 1 !important; padding: 24px; }
+    .w-profile h1 { font-size: 32px; }
+
+    /* 잔디밭 위젯 모바일 최적화 */
+    .w-grass { overflow: hidden; padding-bottom: 20px; }
+    .calendar-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* 깃허브 스탯 슬라이더 여백 조정 */
+    .w-stats { padding: 24px; overflow: visible; }
+    .stats-grid {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scroll-behavior: smooth;
+      gap: 12px; scrollbar-width: none; margin: 0 -8px; padding: 0 8px;
+    }
+    .stats-grid::-webkit-scrollbar { display: none; }
+    .stats-grid .stat-card {
+      min-width: calc(50% - 6px); flex-shrink: 0; scroll-snap-align: start;
+    }
+
+    .stats-dots { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+    .stats-dots span {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--silver-border-hover);
+      transition: background 0.3s, transform 0.3s; cursor: pointer;
+    }
+    .stats-dots span.active { background: var(--text-dark); transform: scale(1.3); }
+  }
+</style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+  <header>
+    <div class="logo"><div class="logo-dot"></div>JJH_Workspace</div>
+  </header>
+
+  <main class="bento-grid">
+
+    <div class="widget w-profile">
+      <div class="eyebrow">STUDENT DEVELOPER & DESIGNER</div>
+      <h1>Jeon<br>Jae Hyun</h1>
+      <p>보이는 곳과 보이지 않는 곳 모두에 진심인 고등학생 풀스택 개발자입니다. 기능 구현을 넘어 사용자 경험을 고려한 UI/UX 설계와 깔끔한 웹 개발을 즐깁니다.</p>
+    </div>
+
+    <div class="widget w-status">
+      <div class="status-icon">💻<div class="pulse-dot"></div></div>
+      <h3>Student Dev</h3>
+      <p>스마트소프트웨어과</p>
+    </div>
+
+    <div class="widget w-info">
+      <div class="info-row"><span class="info-label">Location</span><span class="info-value">대구광역시, KR</span></div>
+      <div class="info-row">
+        <span class="info-label">Email</span>
+        <span class="info-value clickable-email" id="copy-email" data-email="j01092014477@gmail.com">j01092014477@gmail.com</span>
+      </div>
+      <div class="info-row"><span class="info-label">Instagram</span><a href="https://instagram.com/@jeonjaehyeon" target="_blank" class="info-value">@jeonjaehyeon↗</a></div>
+    </div>
+
+    <div class="widget w-stats">
+      <div class="widget-title">GitHub Stats</div>
+      <div class="stats-grid" id="stats-slider">
+        <div class="stat-card"><div class="stat-label">Repositories</div><div class="stat-num" id="gh-repos">—</div></div>
+        <div class="stat-card"><div class="stat-label">Total Stars</div><div class="stat-num" id="gh-stars">—</div></div>
+        <div class="stat-card"><div class="stat-label">Followers</div><div class="stat-num" id="gh-followers">—</div></div>
+        <div class="stat-card"><div class="stat-label">Following</div><div class="stat-num" id="gh-following">—</div></div>
+      </div>
+      <div class="stats-dots" id="stats-dots">
+        <span class="active" data-index="0"></span>
+        <span data-index="1"></span>
+      </div>
+    </div>
+
+    <div class="widget w-projects">
+      <div class="widget-title">Selected Works</div>
+      <div class="project-card">
+        <div class="p-header"><h4>달빛연합 해커톤 — 융합상 수상</h4><a href="https://github.com/jjh090802" target="_blank" class="btn-icon">↗</a></div>
+        <p class="p-desc">REST API 연동 및 실시간 데이터 시각화 웹 서비스</p>
+        <div class="p-tags"><span class="tag">JavaScript</span><span class="tag">Figma</span><span class="tag">REST API</span></div>
+      </div>
+      <div class="project-card">
+        <div class="p-header"><h4>인터랙티브 개인 포트폴리오</h4><a href="https://github.com/jjh090802" target="_blank" class="btn-icon">↗</a></div>
+        <p class="p-desc">Vanilla JS를 활용한 커스텀 커서 및 인터랙션 구현</p>
+        <div class="p-tags"><span class="tag">HTML/CSS</span><span class="tag">Vanilla JS</span><span class="tag">UI/UX</span></div>
+      </div>
+    </div>
+
+    <div class="widget w-timeline">
+      <div class="widget-title">Background & Awards</div>
+      <div class="tl-item"><div class="tl-icon">🎓</div><div class="tl-content"><h4>영남공업고등학교</h4><p>스마트소프트웨어과 · 2026 - 현재</p></div></div>
+      <div class="tl-item"><div class="tl-icon">🏅</div><div class="tl-content"><h4>지방기능경기대회 동메달</h4><p>웹 디자인 및 개발 부문 · 2025</p></div></div>
+      <div class="tl-item"><div class="tl-icon">💡</div><div class="tl-content"><h4>달빛연합 해커톤 융합상</h4><p>팀 프로젝트 프론트엔드 리드 · 2025</p></div></div>
+    </div>
+
+    <div class="widget w-grass">
+      <div class="widget-title">Contribution Graph</div>
+      <div class="calendar-wrapper" id="github-calendar">잔디를 불러오는 중입니다...</div>
+    </div>
+
+    <div class="widget w-skills">
+      <div class="widget-title">Top Skills</div>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs?username=jjh090802&layout=donut&theme=transparent&hide_border=true&title_color=0f172a&text_color=334155" alt="Top Languages">
+    </div>
+
+  </main>
+</div>
+
+<div id="toast" class="toast">이메일 주소가 복사되었습니다.</div>
+
+<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+<script>
+  GitHubCalendar("#github-calendar", "jjh090802", { responsive: true });
+
+  // 이메일 복사 스크립트
+  const copyBtn = document.getElementById('copy-email');
+  const toast = document.getElementById('toast');
+  let toastTimeout;
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(copyBtn.getAttribute('data-email')).then(() => {
+      clearTimeout(toastTimeout);
+      toast.classList.add('show');
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    });
+  });
+
+  // GitHub Stats 데이터 가져오기
+  async function loadGitHubStats() {
+    try {
+      const [userRes, reposRes] = await Promise.all([
+        fetch('https://api.github.com/users/jjh090802'),
+        fetch('https://api.github.com/users/jjh090802/repos?per_page=100'),
+      ]);
+      const user = await userRes.json();
+      const repos = await reposRes.json();
+
+      const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+      document.getElementById('gh-repos').textContent = user.public_repos ?? '—';
+      document.getElementById('gh-stars').textContent = totalStars;
+      document.getElementById('gh-followers').textContent = user.followers ?? '—';
+      document.getElementById('gh-following').textContent = user.following ?? '—';
+    } catch (err) {
+      console.error('GitHub Stats 로드 실패', err);
+    }
+  }
+  loadGitHubStats();
+
+  // 모바일 스탯 슬라이더 인터랙션
+  const statsSlider = document.getElementById('stats-slider');
+  const statsDots = document.querySelectorAll('#stats-dots span');
+
+  if (statsSlider && statsDots.length) {
+    statsDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.dataset.index);
+        const cardWidth = statsSlider.querySelector('.stat-card').offsetWidth + 12; // gap 포함
+        statsSlider.scrollTo({ left: cardWidth * index * 2, behavior: 'smooth' });
+      });
+    });
+
+    statsSlider.addEventListener('scroll', () => {
+      const cardWidth = statsSlider.querySelector('.stat-card').offsetWidth + 12;
+      const index = Math.round(statsSlider.scrollLeft / (cardWidth * 2));
+      statsDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }, { passive: true });
+  }
+</script>
+</body>
+</html>
