@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeon Jae Hyun | Minimal Luxury Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23E2E8F0'/%3E%3Cstop offset='100%25' stop-color='%23CBD5E1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='sans-serif' font-size='15' font-weight='700' fill='%230F172A' letter-spacing='1'%3EJH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+  <header>
+    <div class="logo"><div class="logo-dot"></div>JJH_Workspace</div>
+  </header>
+
+  <main class="bento-grid">
+
+    <div class="widget w-profile">
+      <div class="eyebrow">STUDENT DEVELOPER & DESIGNER</div>
+      <h1>Jeon<br>Jae Hyun</h1>
+      <p>프론트엔드와 백엔드를 모두 다루는 고등학생 풀스택 개발자입니다. UI/UX 설계부터 기능 구현까지, 사용자 중심의 완성도 있는 웹을 만듭니다.</p>
+    </div>
+
+    <div class="widget w-status">
+      <div class="pulse-dot"></div>
+      <div class="status-icon">💻</div>
+      <h3>Student Dev</h3>
+      <p>스마트소프트웨어과</p>
+    </div>
+
+    <div class="widget w-info">
+      <div class="info-row"><span class="info-label">Location</span><span class="info-value">대구광역시, KR</span></div>
+      <div class="info-row">
+        <span class="info-label">Email</span>
+        <span class="info-value clickable-email" id="copy-email" data-email="j01092014477@gmail.com">j01092014477@gmail.com</span>
+      </div>
+      <div class="info-row"><span class="info-label">Instagram</span><a href="https://instagram.com/@jeonjaehyeon" target="_blank" class="info-value">@jeonjaehyeon↗</a></div>
+    </div>
+
+    <div class="widget w-stats">
+      <div class="widget-title">GitHub Stats</div>
+      <div class="stats-grid" id="stats-slider">
+        <div class="stat-card"><div class="stat-label">Repositories</div><div class="stat-num" id="gh-repos">—</div></div>
+        <div class="stat-card"><div class="stat-label">Total Stars</div><div class="stat-num" id="gh-stars">—</div></div>
+        <div class="stat-card"><div class="stat-label">Followers</div><div class="stat-num" id="gh-followers">—</div></div>
+        <div class="stat-card"><div class="stat-label">Following</div><div class="stat-num" id="gh-following">—</div></div>
+      </div>
+      <div class="stats-dots" id="stats-dots">
+        <span class="active" data-index="0"></span>
+        <span data-index="1"></span>
+      </div>
+    </div>
+
+    <div class="widget w-projects">
+      <div class="widget-title">Selected Works</div>
+      <div class="project-card">
+        <div class="p-header"><h4>달빛연합 해커톤 — 융합상 수상</h4><a href="https://github.com/jjh090802" target="_blank" class="btn-icon">↗</a></div>
+        <p class="p-desc">REST API 연동 및 실시간 데이터 시각화 웹 서비스</p>
+        <div class="p-tags"><span class="tag">JavaScript</span><span class="tag">Figma</span><span class="tag">REST API</span></div>
+      </div>
+      <div class="project-card">
+        <div class="p-header"><h4>인터랙티브 개인 포트폴리오</h4><a href="https://github.com/jjh090802" target="_blank" class="btn-icon">↗</a></div>
+        <p class="p-desc">Vanilla JS를 활용한 커스텀 커서 및 인터랙션 구현</p>
+        <div class="p-tags"><span class="tag">HTML/CSS</span><span class="tag">Vanilla JS</span><span class="tag">UI/UX</span></div>
+      </div>
+    </div>
+
+    <div class="widget w-timeline">
+      <div class="widget-title">Background & Awards</div>
+      <div class="tl-item"><div class="tl-icon">🎓</div><div class="tl-content"><h4>영남공업고등학교</h4><p>스마트소프트웨어과 · 2026 - 현재</p></div></div>
+      <div class="tl-item"><div class="tl-icon">🏅</div><div class="tl-content"><h4>지방기능경기대회 동메달</h4><p>웹 디자인 및 개발 부문 · 2025</p></div></div>
+      <div class="tl-item"><div class="tl-icon">💡</div><div class="tl-content"><h4>달빛연합 해커톤 융합상</h4><p>팀 프로젝트 프론트엔드 리드 · 2025</p></div></div>
+    </div>
+
+    <div class="widget w-grass">
+      <div class="widget-title">Contribution Graph</div>
+      <div class="calendar-wrapper" id="github-calendar">잔디를 불러오는 중입니다...</div>
+    </div>
+
+    <div class="widget w-skills">
+      <div class="widget-title">Top Skills</div>
+      <div class="lang-list" id="gh-langs"><div style="color:var(--text-muted);font-size:12px;">불러오는 중...</div></div>
+    </div>
+
+    <div class="widget w-tools">
+      <div class="widget-title">Gears & Tools</div>
+      <div class="tools-grid">
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" class="tool-icon" alt="">HTML</span></div>
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" class="tool-icon" alt="">CSS</span></div>
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" class="tool-icon" alt="">JavaScript</span></div>
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" class="tool-icon" alt="">Python</span></div>
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" class="tool-icon" alt="">C</span></div>
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" class="tool-icon" alt="">VS Code</span></div>
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" class="tool-icon" alt="">Git / GitHub</span></div>
+        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.simpleicons.org/notion/000000" class="tool-icon" alt="">Notion</span></div>
+      </div>
+    </div>
+
+    <div class="widget w-focus">
+      <div class="widget-title">Current Focus</div>
+      <div class="focus-item">
+        <div class="focus-info"><span>Interactive Web UI</span><span>85%</span></div>
+        <div class="focus-bar-bg"><div class="focus-bar-fill" style="width: 85%;"></div></div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-info"><span>Backend Architecture</span><span>60%</span></div>
+        <div class="focus-bar-bg"><div class="focus-bar-fill" style="width: 60%;"></div></div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-info"><span>UX Data Visualization</span><span>70%</span></div>
+        <div class="focus-bar-bg"><div class="focus-bar-fill" style="width: 70%;"></div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div id="toast" class="toast">이메일 주소가 복사되었습니다.</div>
+
+<script src="script.js"></script>
+</body>
+</html>
