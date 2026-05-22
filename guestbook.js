@@ -5,6 +5,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+// Firebase 웹 API 키는 공개되어도 무방하나, 반드시 Firestore 보안 규칙으로
+// 쓰기 요청량/필드 검증을 제한해야 합니다 (request.auth, request.resource 검증).
 const firebaseConfig = {
   apiKey: "AIzaSyCicwsChtH5Sg4bWpSOv18hrnB_vX5Qckw",
   authDomain: "jjh-portfolio-122b9.firebaseapp.com",
@@ -259,3 +261,29 @@ function showToast() {
   toast.classList.add('show');
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
 }
+
+(function initPageTransition() {
+  const html = document.documentElement;
+  const overlay = document.getElementById('page-transition');
+  if (!overlay) return;
+
+  if (html.classList.contains('pt-enter')) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => html.classList.remove('pt-enter'));
+    });
+  }
+
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('a[data-page-link]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (reduced) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || /^(https?:)?\/\//.test(href)) return;
+      e.preventDefault();
+      overlay.classList.add('is-active');
+      setTimeout(() => { window.location.href = href; }, 450);
+    });
+  });
+})();

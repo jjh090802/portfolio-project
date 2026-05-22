@@ -3,126 +3,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jeon Jae Hyun | Minimal Luxury Portfolio</title>
+<title>전재현 (Jeon Jae Hyun) — 풀스택 개발자 포트폴리오</title>
+
+<meta name="description" content="프론트엔드와 백엔드를 모두 다루는 고등학생 풀스택 개발자 전재현의 포트폴리오. 달빛연합 해커톤 융합상, 지방기능경기대회 동메달 수상.">
+<meta name="author" content="Jeon Jae Hyun">
+<meta name="theme-color" content="#0F172A">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://jjh090802.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="전재현 — 풀스택 개발자 포트폴리오">
+<meta property="og:description" content="UI/UX 설계부터 기능 구현까지, 사용자 중심의 완성도 있는 웹을 만드는 고등학생 풀스택 개발자.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="JJH_Workspace">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="전재현 — 풀스택 개발자 포트폴리오">
+<meta name="twitter:description" content="UI/UX 설계부터 기능 구현까지, 사용자 중심의 완성도 있는 웹을 만드는 고등학생 풀스택 개발자.">
+
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23E2E8F0'/%3E%3Cstop offset='100%25' stop-color='%23CBD5E1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='sans-serif' font-size='15' font-weight='700' fill='%230F172A' letter-spacing='1'%3EJH%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.github.com" crossorigin>
+<link rel="preconnect" href="https://github-contributions-api.jogruber.de" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Poppins:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
+
+<script>
+  (function () {
+    try {
+      if (sessionStorage.getItem('jh-preload-seen') === '1') {
+        document.documentElement.classList.add('no-preloader');
+        return;
+      }
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('no-preloader');
+        return;
+      }
+      document.documentElement.classList.add('preloading');
+      setTimeout(function () {
+        var p = document.getElementById('preloader');
+        if (p && document.documentElement.classList.contains('preloading')) {
+          document.documentElement.classList.remove('preloading');
+          p.remove();
+        }
+      }, 3500);
+    } catch (e) {
+      document.documentElement.classList.add('no-preloader');
+    }
+  })();
+</script>
+
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      if (html.classList.contains('preloading')) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (performance && performance.getEntriesByType) {
+        var nav = performance.getEntriesByType('navigation')[0];
+        if (nav && nav.type === 'reload') return;
+      }
+      html.classList.add('pt-enter');
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jeon Jae Hyun",
+  "alternateName": "전재현",
+  "jobTitle": "Full-stack Developer",
+  "email": "mailto:j01092014477@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Daegu", "addressCountry": "KR" },
+  "alumniOf": { "@type": "EducationalOrganization", "name": "영남공업고등학교 스마트소프트웨어과" },
+  "sameAs": [
+    "https://github.com/jjh090802",
+    "https://www.instagram.com/jeonjaehyeon/"
+  ]
+}
+</script>
 
 </head>
 <body>
 
-<div class="dashboard-wrapper">
-  <header>
-    <div class="logo"><div class="logo-dot"></div>JJH_Workspace</div>
-  </header>
+<div class="page-transition" id="page-transition" aria-hidden="true"></div>
 
-  <main class="bento-grid">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
 
-    <div class="widget w-profile">
-      <div class="eyebrow">STUDENT DEVELOPER & DESIGNER</div>
-      <h1>Jeon<br>Jae Hyun</h1>
-      <p>프론트엔드와 백엔드를 모두 다루는 고등학생 풀스택 개발자입니다. UI/UX 설계부터 기능 구현까지, 사용자 중심의 완성도 있는 웹을 만듭니다.</p>
+<div id="preloader" aria-hidden="true">
+  <div class="preloader-inner">
+    <svg class="preloader-logo" viewBox="0 0 180 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path class="pl-stroke pl-j" pathLength="1" d="M 70 15 L 70 65 Q 70 82 53 82 L 48 82 Q 32 82 32 67"/>
+      <path class="pl-stroke pl-h" pathLength="1" d="M 100 15 L 100 85 M 100 50 L 145 50 M 145 15 L 145 85"/>
+    </svg>
+    <div class="preloader-text">
+      <span class="pl-typed" id="pl-typed"></span><span class="pl-caret" aria-hidden="true"></span>
     </div>
-
-    <div class="widget w-status">
-      <div class="pulse-dot"></div>
-      <div class="status-icon">💻</div>
-      <h3>Student Dev</h3>
-      <p>스마트소프트웨어과</p>
-    </div>
-
-    <div class="widget w-info">
-      <div class="info-row"><span class="info-label">Location</span><span class="info-value">대구광역시, KR</span></div>
-      <div class="info-row">
-        <span class="info-label">Email</span>
-        <span class="info-value clickable-email" id="copy-email" data-email="j01092014477@gmail.com">j01092014477@gmail.com</span>
-      </div>
-      <div class="info-row"><span class="info-label">Instagram</span><a href="https://instagram.com/@jeonjaehyeon" target="_blank" class="info-value">@jeonjaehyeon↗</a></div>
-    </div>
-
-    <div class="widget w-stats">
-      <div class="widget-title">GitHub Stats</div>
-      <div class="stats-grid" id="stats-slider">
-        <div class="stat-card"><div class="stat-label">Repositories</div><div class="stat-num" id="gh-repos">—</div></div>
-        <div class="stat-card"><div class="stat-label">Total Stars</div><div class="stat-num" id="gh-stars">—</div></div>
-        <div class="stat-card"><div class="stat-label">Followers</div><div class="stat-num" id="gh-followers">—</div></div>
-        <div class="stat-card"><div class="stat-label">Following</div><div class="stat-num" id="gh-following">—</div></div>
-      </div>
-      <div class="stats-dots" id="stats-dots">
-        <span class="active" data-index="0"></span>
-        <span data-index="1"></span>
-      </div>
-    </div>
-
-    <div class="widget w-projects">
-      <div class="widget-title">Selected Works</div>
-      <div class="project-card">
-        <div class="p-header"><h4>달빛연합 해커톤 — 융합상 수상</h4><a href="https://github.com/jjh090802" target="_blank" class="btn-icon">↗</a></div>
-        <p class="p-desc">REST API 연동 및 실시간 데이터 시각화 웹 서비스</p>
-        <div class="p-tags"><span class="tag">JavaScript</span><span class="tag">Figma</span><span class="tag">REST API</span></div>
-      </div>
-      <div class="project-card">
-        <div class="p-header"><h4>인터랙티브 개인 포트폴리오</h4><a href="https://github.com/jjh090802" target="_blank" class="btn-icon">↗</a></div>
-        <p class="p-desc">Vanilla JS를 활용한 커스텀 커서 및 인터랙션 구현</p>
-        <div class="p-tags"><span class="tag">HTML/CSS</span><span class="tag">Vanilla JS</span><span class="tag">UI/UX</span></div>
-      </div>
-    </div>
-
-    <div class="widget w-timeline">
-      <div class="widget-title">Background & Awards</div>
-      <div class="tl-item"><div class="tl-icon">🎓</div><div class="tl-content"><h4>영남공업고등학교</h4><p>스마트소프트웨어과 · 2026 - 현재</p></div></div>
-      <div class="tl-item"><div class="tl-icon">🏅</div><div class="tl-content"><h4>지방기능경기대회 동메달</h4><p>웹 디자인 및 개발 부문 · 2025</p></div></div>
-      <div class="tl-item"><div class="tl-icon">💡</div><div class="tl-content"><h4>달빛연합 해커톤 융합상</h4><p>팀 프로젝트 프론트엔드 리드 · 2025</p></div></div>
-    </div>
-
-    <div class="widget w-grass">
-      <div class="widget-title">Contribution Graph</div>
-      <div class="calendar-wrapper" id="github-calendar">잔디를 불러오는 중입니다...</div>
-    </div>
-
-    <div class="widget w-skills">
-      <div class="widget-title">Top Skills</div>
-      <div class="lang-list" id="gh-langs"><div style="color:var(--text-muted);font-size:12px;">불러오는 중...</div></div>
-    </div>
-
-    <div class="widget w-tools">
-      <div class="widget-title">Gears & Tools</div>
-      <div class="tools-grid">
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" class="tool-icon" alt="">HTML</span></div>
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" class="tool-icon" alt="">CSS</span></div>
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" class="tool-icon" alt="">JavaScript</span></div>
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" class="tool-icon" alt="">Python</span></div>
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" class="tool-icon" alt="">C</span></div>
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" class="tool-icon" alt="">VS Code</span></div>
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" class="tool-icon" alt="">Git / GitHub</span></div>
-        <div class="tool-chip"><span class="tool-info"><img src="https://cdn.simpleicons.org/notion/000000" class="tool-icon" alt="">Notion</span></div>
-      </div>
-    </div>
-
-    <div class="widget w-focus">
-      <div class="widget-title">Current Focus</div>
-      <div class="focus-item">
-        <div class="focus-info"><span>Interactive Web UI</span><span>85%</span></div>
-        <div class="focus-bar-bg"><div class="focus-bar-fill" style="width: 85%;"></div></div>
-      </div>
-      <div class="focus-item">
-        <div class="focus-info"><span>Backend Architecture</span><span>60%</span></div>
-        <div class="focus-bar-bg"><div class="focus-bar-fill" style="width: 60%;"></div></div>
-      </div>
-      <div class="focus-item">
-        <div class="focus-info"><span>UX Data Visualization</span><span>70%</span></div>
-        <div class="focus-bar-bg"><div class="focus-bar-fill" style="width: 70%;"></div></div>
-      </div>
-    </div>
-
-  </main>
+  </div>
 </div>
 
-<div id="toast" class="toast">이메일 주소가 복사되었습니다.</div>
+<div class="dashboard-wrapper">
+  <header role="banner">
+    <a href="#main" class="logo logo-link" aria-label="JJH Workspace 홈">
+      <span class="logo-dot" aria-hidden="true"></span>JJH_Workspace
+    </a>
+  </header>
 
-<script src="script.js"></script>
+  <main id="main" class="bento-grid" role="main">
+
+    <section class="widget w-profile" aria-labelledby="profile-heading">
+      <p class="eyebrow">STUDENT DEVELOPER &amp; DESIGNER</p>
+      <h1 id="profile-heading">Jeon<br>Jae Hyun</h1>
+      <p>프론트엔드와 백엔드를 모두 다루는 고등학생 풀스택 개발자입니다. UI/UX 설계부터 기능 구현까지, 사용자 중심의 완성도 있는 웹을 만듭니다.</p>
+    </section>
+
+    <section class="widget w-status" aria-label="현재 상태">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <div class="status-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      </div>
+      <h2 class="status-title">Student Dev</h2>
+      <p>스마트소프트웨어과</p>
+    </section>
+
+    <section class="widget w-info" aria-labelledby="info-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <h2 id="info-heading" class="visually-hidden">연락처 정보</h2>
+      <dl>
+        <div class="info-row">
+          <dt class="info-label">Location</dt>
+          <dd class="info-value">대구광역시, KR</dd>
+        </div>
+        <div class="info-row">
+          <dt class="info-label">Email</dt>
+          <dd>
+            <button type="button" class="info-value clickable-email" id="copy-email" data-email="j01092014477@gmail.com" aria-label="이메일 주소 복사: j01092014477@gmail.com">
+              j01092014477@gmail.com
+            </button>
+          </dd>
+        </div>
+        <div class="info-row">
+          <dt class="info-label">Instagram</dt>
+          <dd>
+            <a href="https://www.instagram.com/jeonjaehyeon/" target="_blank" rel="noopener noreferrer" class="info-value">@jeonjaehyeon<span aria-hidden="true">↗</span></a>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="widget w-stats" aria-labelledby="stats-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      <h2 id="stats-heading" class="widget-title">GitHub Stats</h2>
+      <div class="stats-grid" id="stats-slider">
+        <div class="stat-card"><span class="stat-label">Repositories</span><span class="stat-num" id="gh-repos" aria-live="polite">—</span></div>
+        <div class="stat-card"><span class="stat-label">Total Stars</span><span class="stat-num" id="gh-stars" aria-live="polite">—</span></div>
+        <div class="stat-card"><span class="stat-label">Followers</span><span class="stat-num" id="gh-followers" aria-live="polite">—</span></div>
+        <div class="stat-card"><span class="stat-label">Following</span><span class="stat-num" id="gh-following" aria-live="polite">—</span></div>
+      </div>
+      <div class="stats-dots" id="stats-dots" role="tablist" aria-label="통계 페이지 이동">
+        <button type="button" class="active" data-index="0" aria-label="1번째 페이지"></button>
+        <button type="button" data-index="1" aria-label="2번째 페이지"></button>
+      </div>
+    </section>
+
+    <section class="widget w-projects" aria-labelledby="projects-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      <h2 id="projects-heading" class="widget-title">Selected Works</h2>
+      <article class="project-card">
+        <div class="p-header">
+          <h3>달빛연합 해커톤 — 융합상 수상</h3>
+          <a href="https://github.com/jjh090802" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="달빛연합 해커톤 GitHub 저장소 새 창에서 열기">↗</a>
+        </div>
+        <p class="p-desc">시각장애인 보조용 웨어러블 디바이스 — AI 객체 인식 + 초음파 거리 측정 (라즈베리파이 기반 소프트웨어 담당)</p>
+        <ul class="p-tags" aria-label="사용 기술">
+          <li class="tag">AI / Vision</li>
+          <li class="tag">Python</li>
+          <li class="tag">Raspberry Pi</li>
+        </ul>
+      </article>
+      <article class="project-card">
+        <div class="p-header">
+          <h3>인터랙티브 개인 포트폴리오</h3>
+          <a href="https://github.com/jjh090802" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="포트폴리오 GitHub 저장소 새 창에서 열기">↗</a>
+        </div>
+        <p class="p-desc">Vanilla JS로 커스텀 커서, 마이크로 인터랙션, GitHub API 연동까지 직접 구현</p>
+        <ul class="p-tags" aria-label="사용 기술">
+          <li class="tag">HTML/CSS</li>
+          <li class="tag">Vanilla JS</li>
+          <li class="tag">UI/UX</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="widget w-timeline" aria-labelledby="timeline-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+      <h2 id="timeline-heading" class="widget-title">Background &amp; Awards</h2>
+      <ol class="timeline-list">
+        <li class="tl-item">
+          <span class="tl-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </span>
+          <div class="tl-content">
+            <h3>영남공업고등학교</h3>
+            <p><time datetime="2026">2026</time> – 현재 · 스마트소프트웨어과</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="tl-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </span>
+          <div class="tl-content">
+            <h3>지방기능경기대회 동메달</h3>
+            <p><time datetime="2025">2025</time> · 웹 디자인 및 개발 부문</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="tl-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+          </span>
+          <div class="tl-content">
+            <h3>달빛연합 해커톤 융합상</h3>
+            <p><time datetime="2025">2025</time> · 시각장애 보조 웨어러블 디바이스 (팀 프로젝트)</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="widget w-grass" aria-labelledby="grass-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <h2 id="grass-heading" class="widget-title">Contribution Graph</h2>
+      <div class="calendar-wrapper" id="github-calendar" role="img" aria-label="지난 1년간 GitHub 기여 활동 그래프">잔디를 불러오는 중입니다...</div>
+    </section>
+
+    <section class="widget w-skills" aria-labelledby="skills-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <h2 id="skills-heading" class="widget-title">Top Skills</h2>
+      <div class="lang-list" id="gh-langs" aria-live="polite"><p class="lang-empty">불러오는 중...</p></div>
+    </section>
+
+    <section class="widget w-tools" aria-labelledby="tools-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <h2 id="tools-heading" class="widget-title">Gears &amp; Tools</h2>
+      <ul class="tools-grid">
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" class="tool-icon" alt="" loading="lazy" width="26" height="26">HTML</span></li>
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" class="tool-icon" alt="" loading="lazy" width="26" height="26">CSS</span></li>
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" class="tool-icon" alt="" loading="lazy" width="26" height="26">JavaScript</span></li>
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" class="tool-icon" alt="" loading="lazy" width="26" height="26">Python</span></li>
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" class="tool-icon" alt="" loading="lazy" width="26" height="26">C</span></li>
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" class="tool-icon" alt="" loading="lazy" width="26" height="26">VS Code</span></li>
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" class="tool-icon" alt="" loading="lazy" width="26" height="26">Git / GitHub</span></li>
+        <li class="tool-chip"><span class="tool-info"><img src="https://cdn.simpleicons.org/notion/000000" class="tool-icon" alt="" loading="lazy" width="26" height="26">Notion</span></li>
+      </ul>
+    </section>
+
+    <section class="widget w-clock" aria-labelledby="clock-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <h2 id="clock-heading" class="visually-hidden">현지 시간</h2>
+      <span class="clock-time" id="clock-time">--:--:--</span>
+      <span class="clock-location">Daegu, KR</span>
+      <span class="clock-date" id="clock-date">—</span>
+    </section>
+
+    <section class="widget w-guestbook" aria-labelledby="guestbook-heading">
+      <svg class="widget-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <h2 id="guestbook-heading" class="widget-title">Guestbook</h2>
+      <p class="guestbook-desc">방문해 주신 분들의 발자취를 기록하는 작은 공간입니다. 어떤 이야기든 환영하니 편하게 메시지를 남겨주세요.</p>
+      <a href="guestbook.html" class="guestbook-btn" id="guestbook-link" data-page-link>
+        <span>방문록 남기기</span>
+        <span class="guestbook-arrow" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="footer-year">2026</span> Jeon Jae Hyun. Built with vanilla HTML, CSS, and JavaScript.</p>
+  </footer>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">이메일 주소가 복사되었습니다.</div>
+
+<div id="chatbot">
+  <button id="chatbot-toggle" type="button" class="chatbot-toggle" aria-label="JH Bot 열기" aria-expanded="false" aria-controls="chatbot-window">
+    <svg class="cb-icon-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    <svg class="cb-icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    <span class="chatbot-toggle-pulse" aria-hidden="true"></span>
+  </button>
+
+  <div id="chatbot-window" class="chatbot-window" role="dialog" aria-modal="false" aria-labelledby="chatbot-name-label" aria-hidden="true">
+    <div class="chatbot-header">
+      <div class="chatbot-avatar" aria-hidden="true">JH</div>
+      <div class="chatbot-header-info">
+        <div class="chatbot-name" id="chatbot-name-label">JH Bot</div>
+        <div class="chatbot-status"><span class="chatbot-status-dot" aria-hidden="true"></span>전재현 대신 답변해요</div>
+      </div>
+      <button type="button" class="chatbot-close" id="chatbot-close" aria-label="채팅창 닫기">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite" aria-label="대화 내용"></div>
+
+    <div class="chatbot-suggestions" id="chatbot-suggestions"></div>
+
+    <form class="chatbot-input-wrap" id="chatbot-form" autocomplete="off">
+      <label for="chatbot-input" class="visually-hidden">메시지 입력</label>
+      <input type="text" id="chatbot-input" placeholder="무엇이든 물어보세요..." maxlength="200">
+      <button type="submit" class="chatbot-send" aria-label="메시지 전송">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="script.js" defer></script>
+<script src="chatbot.js" defer></script>
 </body>
 </html>
