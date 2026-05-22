@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guestbook | Jeon Jae Hyun</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23E2E8F0'/%3E%3Cstop offset='100%25' stop-color='%23CBD5E1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='sans-serif' font-size='15' font-weight='700' fill='%230F172A' letter-spacing='1'%3EJH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="guestbook.css">
+
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+  <header>
+    <a href="index.html" class="logo logo-link">
+      <div class="logo-dot"></div>JJH_Workspace
+    </a>
+    <a href="index.html" class="back-link">← Portfolio</a>
+  </header>
+
+  <main class="guestbook-main">
+
+    <section class="guestbook-hero">
+      <div class="eyebrow">VISITORS' MESSAGES</div>
+      <h1>Guestbook</h1>
+      <p>방문해 주셔서 감사합니다. 짧은 인사나 피드백을 자유롭게 남겨주세요.</p>
+      <button type="button" class="gb-cta" id="gb-open-modal">
+        <span class="gb-cta-icon" aria-hidden="true">✎</span>
+        <span>메시지 남기기</span>
+      </button>
+    </section>
+
+    <section class="guestbook-list-section">
+      <div class="gb-list-head">
+        <span class="gb-list-title">모든 메시지</span>
+        <span class="gb-count-badge" id="gb-total">—</span>
+      </div>
+      <ul class="gb-masonry" id="gb-list">
+        <li class="gb-empty" id="gb-empty">불러오는 중입니다...</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<div class="gb-modal" id="gb-modal" aria-hidden="true">
+  <div class="gb-modal-backdrop" id="gb-modal-backdrop"></div>
+  <div class="gb-modal-panel" role="dialog" aria-modal="true" aria-labelledby="gb-modal-title">
+    <button type="button" class="gb-modal-close" id="gb-modal-close" aria-label="닫기">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+    <div class="gb-modal-eyebrow">LEAVE A NOTE</div>
+    <h2 class="gb-modal-title" id="gb-modal-title">메시지 남기기</h2>
+    <p class="gb-modal-desc">짧은 인사나 피드백을 자유롭게 남겨주세요.</p>
+    <form id="guestbook-form" class="gb-form" autocomplete="off">
+      <label class="gb-field">
+        <span class="gb-label">이름</span>
+        <input type="text" name="name" maxlength="30" required placeholder="이름 또는 닉네임">
+      </label>
+      <label class="gb-field">
+        <span class="gb-label">메시지</span>
+        <textarea name="message" maxlength="500" rows="5" required placeholder="자유롭게 메시지를 남겨주세요"></textarea>
+        <span class="gb-count"><span id="gb-count-num">0</span> / 500</span>
+      </label>
+      <button type="submit" class="gb-submit" id="gb-submit">
+        <span>방문록 남기기</span>
+        <span class="guestbook-arrow">↗</span>
+      </button>
+      <p class="gb-status" id="gb-status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast">메시지가 등록되었습니다.</div>
+
+<script type="module" src="guestbook.js"></script>
+</body>
+</html>
