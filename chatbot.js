@@ -54,7 +54,7 @@
     },
     {
       keywords: ['인스타', 'sns', '소셜', 'instagram', '팔로우'],
-      reply: '인스타그램 <strong>@jeonjaehyeon</strong> 으로 오시면 일상과 작업물을 함께 보실 수 있어요.'
+      reply: '인스타그램 <strong>@jeonjaehyeon85</strong> 으로 오시면 일상과 작업물을 함께 보실 수 있어요.'
     },
     {
       keywords: ['github', '깃허브', '깃헙', '저장소', '레포'],
